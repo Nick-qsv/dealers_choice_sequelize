@@ -6,6 +6,38 @@ const {
     models: { Author, Book },
   } = require("./db");
 
+
+  app.get("/api/books", async (req, res, next)=>{
+      try{
+        res.send(
+            await Book.findAll({
+                include: [
+                    {model: Author, as: "author"}
+                ]
+            })
+        )
+      }
+      catch(ex){
+          next(ex);
+      }
+  });
+
+
+  app.get("/api/authors", async (req, res, next)=>{
+    try{
+      res.send(
+          await Author.findAll({
+              include: [
+                  {model: Book, as: "authorbooks"}
+              ]
+          })
+      )
+    }
+    catch(ex){
+        next(ex);
+    }
+});
+
   const init = async () => {
     try {
       await syncAndSeed();
