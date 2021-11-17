@@ -27,9 +27,9 @@ const {
     try{
       res.send(
           await Author.findAll({
-              include: [
-                  {model: Book, as: "authorbooks"}
-              ]
+            include: [
+              {model: Book, as: "authored"}
+            ]
           })
       )
     }

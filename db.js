@@ -30,7 +30,7 @@ const Author = conn.define("author", {
 
 
 Book.belongsTo(Author, { as: "author"});
-Author.hasMany(Book, {  as:"author", foreignKey: "authorId" });
+Author.hasMany(Book, { as: "authored", foreignKey: "authorId" });
 
 const syncAndSeed = async () => {
   try{
